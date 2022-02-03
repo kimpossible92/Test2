@@ -110,7 +110,7 @@ public class MoveLayer : MonoBehaviour {
                             print(state);
                             //if (movecount == 1) { Ending = 1; }
                             //movecount -= 1;
-                            if (GetHitGem2 != null) { StartCoroutine(Match(hits));  }
+                            if (GetHitGem2 != null) { StartCoroutine(Match(hits));state = 0;  }
                             else { state = 0; }
                         }
                     }
