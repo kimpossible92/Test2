@@ -6,7 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
-public class OpenLevels : MonoBehaviour {
+public class OpenLevels : MonoBehaviour
+{
     [HideInInspector]public int modeLvl=0;
     public Image TargetBlockImage;
     [SerializeField] Image NextImage;

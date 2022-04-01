@@ -13,8 +13,10 @@ public class OpLvl : MonoBehaviour {
     public EventHandler<LevelProp> LevelReach;
     public MapLevel2 currentLevel;
     [SerializeField] OpenAppLevel GetManager;
+    [SerializeField] NewAppLevel newAppLevel;
     [SerializeField] GameObject NextImage;
     [SerializeField] GameObject buttonImage;
+    public bool isSecondLevel=false;
     public bool IsEnabled;
     // Use this for initialization
     void Start()
@@ -25,6 +27,29 @@ public class OpLvl : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (!isSecondLevel)
+        {
+
+        }
+        else 
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector3.zero);
+                if (hit.collider != null)
+                {
+                    currentLevel = hit.collider.gameObject.GetComponent<MapLevel2>();
+                    if (currentLevel!=null && currentLevel.islock == false)
+                    {
+                        newAppLevel.lvl(currentLevel.Number);
+                        //FindObjectOfType<NewAppLevel>().StripeGameCount
+                        newAppLevel.OnappMatch();
+                        //GetTargetLoad(currentLevel.Number);
+                    } 
+                }
+            }
+            return; 
+        }
         UpdateLevels();
         if (Input.GetMouseButtonDown(0))
         {
@@ -64,6 +89,7 @@ public class OpLvl : MonoBehaviour {
             {
                 string limitsString = tag.Replace("LIMIT", string.Empty).Trim();
                 string[] limit12 = limitsString.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
+                if (GetMoveLayer == null) { return; }
                 GetMoveLayer.movecount = int.Parse(limit12[1]);
                 GetMoveLayer.limitMove = int.Parse(limit12[0]);
             }
@@ -126,8 +152,14 @@ public class OpLvl : MonoBehaviour {
         {
             OnMouseOverOitemEventHandler(this);
         }
+        if (InMouseOverHandler != null)
+        {
+            InMouseOverHandler(this);
+        }
     }
+    public delegate void InMouseOver(OpLvl o);
     public delegate void OnMouseOverOitem(OpLvl o);
+    public static event InMouseOver InMouseOverHandler;
     public static event OnMouseOverOitem OnMouseOverOitemEventHandler;
 }
 public class LevelProp : System.EventArgs

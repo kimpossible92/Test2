@@ -93,7 +93,7 @@ public class MoveLayer : MonoBehaviour {
                 if (Input.GetMouseButtonUp(0))
                 {
                     var hits = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector3.zero);
-                    if (hits.collider != null)//&& GetHitGem != hits.collider.gameObject)
+                    if (hits.collider != null)
                     {
                         HitCandy GetHitGem2 = hits.collider.gameObject.GetComponent<HitCandy>();
                         bug[0].SetActive(false);
@@ -211,6 +211,7 @@ public class MoveLayer : MonoBehaviour {
         int candylimit=0;
         bool iswirl = false;
         int randcol = Random.Range(2, SizeX - 2);
+
         for (int row = 0; row < SizeY; row++)
         {
             for (int col = 0; col < SizeX; col++)
@@ -242,6 +243,7 @@ public class MoveLayer : MonoBehaviour {
         }
         return false;
     }
+    
     /// <summary>
     /// 
     /// </summary>

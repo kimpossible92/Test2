@@ -13,6 +13,15 @@ public class Block : MonoBehaviour {
     [SerializeField] Sprite GetSprite1;
     [HideInInspector] public int modelvlsquare;
     public int addScore;
+    [SerializeField] TMPro.TextMeshPro Text1;
+    public void setViewText(bool txt)
+    {
+        Text1.gameObject.SetActive(txt);
+        if (txt == true)
+        {
+            Text1.text = candy.ToIntType().ToString();
+        }
+    }
 	// Use this for initialization
 	void Start () {
 		

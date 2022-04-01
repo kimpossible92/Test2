@@ -29,6 +29,7 @@ public class OpenAppLevel : MonoBehaviour
     [HideInInspector] public int modeLvl = 0;
     [HideInInspector] public int Limit;
     [SerializeField] MoveLayer GetMoveLayer;
+    [SerializeField] move2 GetMove2;
     [SerializeField] Button NazadButton;
     [SerializeField] GameObject getBlock;
     [SerializeField] GameObject blockpref;
@@ -89,8 +90,16 @@ public class OpenAppLevel : MonoBehaviour
     public void OnappMatch()
     {
         NazadButton.gameObject.SetActive(false);//
-        GetMoveLayer.gameObject.SetActive(true);
-        GetMoveLayer.loadMove(false);
+        if (GetMoveLayer != null)
+        {
+            GetMoveLayer.gameObject.SetActive(true);
+            GetMoveLayer.loadMove(false);
+        }
+        else
+        {
+            GetMove2.gameObject.SetActive(true);
+            GetMove2.loadMove(false);
+        }
         TextAsset text = (TextAsset)Resources.Load("" + currentlvl);
         if (text == null) text = Resources.Load("" + currentlvl) as TextAsset;
         openLeveltxt(text.text);
@@ -102,7 +111,8 @@ public class OpenAppLevel : MonoBehaviour
                 Createblock(col, row);
             }
         }
-        GetMoveLayer.restarting();
+        if (GetMoveLayer != null) { GetMoveLayer.restarting(); }
+        else { GetMove2.restarting(); }
         OpLvl.THIS.gameObject.SetActive(false);
         NextImage.gameObject.SetActive(false);
         if (modeLvl == 3)
@@ -115,7 +125,8 @@ public class OpenAppLevel : MonoBehaviour
             TargetBlockImage.gameObject.SetActive(false);
             IngredientsCountImage.SetActive(true);
             IngredientsCountImage2.SetActive(true);
-            GetMoveLayer.IngredientPosition(ingCtar[0], ingCtar[1]);
+            if (GetMoveLayer != null) { GetMoveLayer.IngredientPosition(ingCtar[0], ingCtar[1]); }
+            else { }
             GetText2.gameObject.SetActive(false);
         }
         else if (modeLvl == 1)
@@ -126,19 +137,20 @@ public class OpenAppLevel : MonoBehaviour
             GetText2.gameObject.SetActive(false);
             IngredientsCountImage.GetComponent<Image>().sprite = GetSpritesFromItem[(int)collectItems[0]];
             IngredientsCountImage2.GetComponent<Image>().sprite = GetSpritesFromItem[(int)collectItems[1]];
-            
+            if (GetMoveLayer == null) { return; }
             if ((uint)ltype == 1 && GetMoveLayer.state == 0)
             {
                 ISNULL = false;
-                if (invoker==false) InvokeRepeating("RunTimer", 1, 1);                
+                if (invoker == false) InvokeRepeating("RunTimer", 1, 1);
             }
         }
         else
         {
+            if (GetMoveLayer == null) { return; }
             TargetBlockImage.gameObject.SetActive(false);
             IngredientsCountImage.SetActive(false);
         }
-        if ((uint)ltype == 1) { GetTextTimer.text = "" + 60; GetMoveLayer.limitMove = 1; }
+        if ((uint)ltype == 1) { if (GetMoveLayer == null) { return; } GetTextTimer.text = "" + 60; GetMoveLayer.limitMove = 1; }
         //print(modeLvl);
     }
     bool invoker = false;
@@ -189,7 +201,11 @@ public class OpenAppLevel : MonoBehaviour
     public void nazad2()
     {
         modeLvl = 1;
-        GetMoveLayer.GetDestroyAlls();
+        if (GetMoveLayer != null)
+        {
+            GetMoveLayer.GetDestroyAlls();
+        }
+        else { GetMove2.GetDestroyAlls(); }
         OnEmptySquare();
         printScores = 0;
         //print(modeLvl);
@@ -203,7 +219,11 @@ public class OpenAppLevel : MonoBehaviour
         }
         GetLevels2.gameObject.SetActive(true);
         GetLevels2.UpdateLevels();
-        GetMoveLayer.gameObject.SetActive(false);
+        if (GetMoveLayer != null)
+        {
+            GetMoveLayer.gameObject.SetActive(false);
+        }
+        else { GetMove2.GetDestroyAlls(); }
         NextImage.gameObject.SetActive(false);
     }
     public void Nazad()

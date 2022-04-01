@@ -21,7 +21,9 @@ public class Arrays : MonoBehaviour {
     public HitCandy IngredientCurrent;
     public Gem currentGem;
     // Use this for initialization
-    void Start() {
+    void Start() 
+    {
+    
     }
     private void Awake()
     {
