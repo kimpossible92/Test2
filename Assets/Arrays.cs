@@ -6,7 +6,7 @@ using UnityEngine;
 public class Arrays : MonoBehaviour {
     [SerializeField] OpenAppLevel levelsManager2;
     public static Arrays THIS;
-    public int SizeX = 9;
+    public int SizeX = 3;
     public int SizeY = 11;
     public Gem[,] gems;
     Gem GetGem1;
@@ -60,11 +60,42 @@ public class Arrays : MonoBehaviour {
         {
             hormatch.Add(gem2);
         }
-        if (hormatch.Count() < 2)
+        if (hormatch.Count() < 1)
         {
             hormatch.Clear();
         }
         return hormatch.Distinct();
+    }
+    public NeighbourProp GetProp(Gem gem1)
+    {
+        NeighbourProp neighbour = new NeighbourProp();
+        IEnumerable<Gem> nhMatch = GetMatchHorizontal(gem1);
+        foreach (var g in nhMatch)
+        {
+            neighbour.gemms.Add(g);
+        }
+        return neighbour;
+    }
+    private IEnumerable<Gem> GetMatchHorizontal(Gem gem)
+    {
+        List<Gem> matches = new List<Gem>();
+        matches.Add(gem);
+        for(int column = 0; column < SizeX; column++)
+        {
+            if(gem.match3(gems[gem.y, column]))
+            {
+                matches.Add(gems[gem.y, column]);
+            }
+            else
+            {
+                //break;
+            }
+        }
+        if (matches.Count() < 1)
+        {
+            matches.Clear();
+        }
+        return matches.Distinct();
     }
     public bool IsNulls(int row,int col)
     {

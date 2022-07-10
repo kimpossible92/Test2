@@ -54,10 +54,11 @@ public class MapLevel2 : MonoBehaviour {
         {
             Lock.SetActive(false);
         }
-        else if (PlayerPrefs.GetString(string.Format("lvl:{0}", Number-1)) == "star1"||
-            PlayerPrefs.GetString(string.Format("lvl:{0}", Number - 1)) == "star2"||
-            PlayerPrefs.GetString(string.Format("lvl:{0}", Number - 1)) == "star3") Lock.SetActive(false);
-        else Lock.SetActive(true);
+        //else if (PlayerPrefs.GetString(string.Format("lvl:{0}", Number-1)) == "star1"||
+        //    PlayerPrefs.GetString(string.Format("lvl:{0}", Number - 1)) == "star2"||
+        //    PlayerPrefs.GetString(string.Format("lvl:{0}", Number - 1)) == "star3") Lock.SetActive(false);
+        //else
+            Lock.SetActive(false);
     }
     public void IsLockedLevel()
     {

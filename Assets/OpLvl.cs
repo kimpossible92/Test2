@@ -16,22 +16,24 @@ public class OpLvl : MonoBehaviour {
     [SerializeField] NewAppLevel newAppLevel;
     [SerializeField] GameObject NextImage;
     [SerializeField] GameObject buttonImage;
+    [SerializeField] GameObject mainmenuButton;
+    [SerializeField] GameObject buttonStart;
     public bool isSecondLevel=false;
     public bool IsEnabled;
     // Use this for initialization
     void Start()
     {
         GetLevels = FindObjectsOfType<MapLevel2>();
+        if (!isSecondLevel)
+        {
+            mainmenuButton.SetActive(false); buttonStart.SetActive(false);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isSecondLevel)
-        {
-
-        }
-        else 
+        if (isSecondLevel) 
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -62,6 +64,8 @@ public class OpLvl : MonoBehaviour {
                     //PortalNetwork.THIS.LeaderBoard(currentLevel.Number);
                     //NextImage.gameObject.SetActive(true);
                     //buttonImage.SetActive(true);
+                    buttonStart.SetActive(true);
+                    mainmenuButton.SetActive(true);
                     MonoBehaviour.FindObjectOfType<OpenAppLevel>().StripeGameCount = 0;
                     GetManager.OnappMatch();
                     GetTargetLoad(currentLevel.Number);

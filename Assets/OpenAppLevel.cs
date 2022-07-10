@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class OpenAppLevel : MonoBehaviour
 {
-    //public static OpenAppLevel THIS;
     [SerializeField] GameObject GetButton;
     public int[] ingTarget = new int[2];
     public int[] collectItems = new int[2];
@@ -125,8 +124,8 @@ public class OpenAppLevel : MonoBehaviour
             TargetBlockImage.gameObject.SetActive(false);
             IngredientsCountImage.SetActive(true);
             IngredientsCountImage2.SetActive(true);
-            if (GetMoveLayer != null) { GetMoveLayer.IngredientPosition(ingCtar[0], ingCtar[1]); }
-            else { }
+            //if (GetMoveLayer != null) { GetMoveLayer.IngredientPosition(ingCtar[0], ingCtar[1]); }
+            //else { }
             GetText2.gameObject.SetActive(false);
         }
         else if (modeLvl == 1)
@@ -336,7 +335,7 @@ public class OpenAppLevel : MonoBehaviour
                 {
                     if (t == 2) { ingTarget[i] = int.Parse(blocksNumbers[i]); }
                     else if (t == 1) collectItems[i] = int.Parse(blocksNumbers[i]);//
-                }//
+                }
             }
             else
             {

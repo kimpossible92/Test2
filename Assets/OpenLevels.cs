@@ -99,7 +99,7 @@ public class OpenLevels : MonoBehaviour
             TargetBlockImage.gameObject.SetActive(false);
             IngredientsCountImage.SetActive(true);
             IngredientsCountImage2.SetActive(true);
-            GetMoveLayer.IngredientPosition(ingrCountTarget[0], ingrCountTarget[1]);
+            //GetMoveLayer.IngredientPosition(ingrCountTarget[0], ingrCountTarget[1]);
             GetText2.gameObject.SetActive(false);
         }
         else if(modeLvl==1)

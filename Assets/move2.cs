@@ -51,8 +51,8 @@ public class move2 : MonoBehaviour
     IEnumerator Match(RaycastHit2D raycast2)
     {
         
-        if (GetBlock != null) {
-            print("getblock");
+        if (GetBlock != null) 
+        {
             if (GetHitGem != null&&GetBlock.col==GetHitGem._block.col)
             {
                 GetHitGem.transform.position = GetBlock.transform.position;
@@ -62,6 +62,24 @@ public class move2 : MonoBehaviour
                     NextRowCandies();
                 }
             } 
+        }
+        yield return new WaitForSeconds(0.3f);
+    }
+    IEnumerator SetNextRow()
+    {
+        if (GetBlock != null)
+        {
+            if (GetHitGem != null && GetBlock.col == GetHitGem._block.col)
+            {
+                GetHitGem.transform.position = GetBlock.transform.position;
+                blockCount++;
+                if (blockCount == hitCandies2.Count)
+                {
+                    RotateRow(0);
+                    RotateRow(1);
+                    RotateRow(2);
+                }
+            }
         }
         yield return new WaitForSeconds(0.3f);
     }
@@ -78,6 +96,17 @@ public class move2 : MonoBehaviour
         }
         nullrow = false;
         Invoke("SetCurrentRow", 7f);
+    }
+    protected void RotateRow(int col)
+    {
+        for (int r = 0; r < SizeY; r++)
+        {
+            int newRow = r -1;
+            if (newRow == -1) { newRow = SizeY-1; }
+            GetArrays[r, col].hitGem.transform.position = levelsApps.blocksp[newRow * levelsApps.MaxX + col].transform.position;
+            GetArrays[r, col].OnInit(GetArrays[newRow, col].hitGem);
+            
+        }
     }
     public bool IsNulls(int row, int col)
     {

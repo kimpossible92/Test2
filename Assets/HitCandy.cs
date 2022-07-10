@@ -47,7 +47,7 @@ public class HitCandy : MonoBehaviour {
     }
     public bool isequal(HitCandy hitCandy)
     {
-        return hitCandy != null && hitCandy.type == type && hitCandy.type != "ingredient" + 0 && hitCandy.type != "ingredient" + 1;
+        return hitCandy != null && hitCandy.type == type;
     }
     public bool isEmpty(List<HitCandy> Hits,HitCandy candy)
     {
@@ -68,7 +68,7 @@ public class HitCandy : MonoBehaviour {
         if (textMesh != null) { textMesh.text = intType.ToString(); return; }
         if (isSwirl == false)
         {
-           if(sprites!=null) GetComponent<SpriteRenderer>().sprite = sprites[GetGem.level];
+           //if(sprites!=null) GetComponent<SpriteRenderer>().sprite = sprites[GetGem.level];
         }
        
     }
