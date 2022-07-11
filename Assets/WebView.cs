@@ -9,9 +9,10 @@ public class WebView : MonoBehaviour
 {
     [SerializeField]UnityEngine.UI.Text _text;
     [SerializeField] private string[] uris;
+    private bool InternetAccess=false;
     public void Play()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        if(!InternetAccess)UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
     public IEnumerator TextConn(Action<bool> callback)
     {
@@ -23,10 +24,12 @@ public class WebView : MonoBehaviour
             Debug.Log(message: "{ GameLog}=>[InternetAccess]-TestConnect \n +URI: " + uri + "\n Network Error" + request.isNetworkError);
             if (request.isNetworkError == false)
             {
+                InternetAccess = true;
                 callback(obj:true);
                 yield break;
             }
         }
+        InternetAccess = false;
         callback(obj: false);
     }
     // Start is called before the first frame update
